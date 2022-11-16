@@ -12,8 +12,8 @@ def runblob(blob, lasthash):
 
 def submit_blob(blob, prev):
   result = json.dumps({"coin_blob": blob,
-              "id_of_miner": 'be8a151b34eb633f052bb4725d307992607eb5ca5ecf938e18357858a8fd654b',
-              "hash_of_last_coin": prev})
+    "id_of_miner": 'be8a151b34eb633f052bb4725d307992607eb5ca5ecf938e18357858a8fd654b',
+    "hash_of_last_coin": prev})
   hdr = {'Content-type': 'application/json'}
   return requests.post('http://cpen442coin.ece.ubc.ca/claim_coin', data=result, headers=hdr)
 
@@ -40,6 +40,7 @@ def FindCollision(procnum, proccount, diff, lasthash, v, interval):
       rt += interval*(proccount-1) 
       diff = requests.post("http://cpen442coin.ece.ubc.ca/difficulty").json()['number_of_leading_zeros']
       lasthash = requests.post("http://cpen442coin.ece.ubc.ca/last_coin").json()['coin_id']
+      print('Starting ' + diff + ' on ' + lasthash)
 
 if __name__ == "__main__":
     manager = multiprocessing.Manager()
