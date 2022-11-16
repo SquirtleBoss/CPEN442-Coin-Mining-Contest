@@ -30,6 +30,8 @@ def textgen(inputInt):
 def FindCollision(procnum, proccount, diff, lasthash, v, interval):
     rt = procnum * interval
     while(1):
+      lasthash = requests.post("http://cpen442coin.ece.ubc.ca/last_coin").json()['coin_id']
+      print('Starting ' + str(diff) + ' on ' + lasthash)
       for i in range(interval):
         string = textgen(rt + i)
         hash = runblob(string, lasthash)
@@ -40,7 +42,7 @@ def FindCollision(procnum, proccount, diff, lasthash, v, interval):
       rt += interval*(proccount-1) 
       diff = requests.post("http://cpen442coin.ece.ubc.ca/difficulty").json()['number_of_leading_zeros']
       lasthash = requests.post("http://cpen442coin.ece.ubc.ca/last_coin").json()['coin_id']
-      print('Starting ' + diff + ' on ' + lasthash)
+      print('Starting ' + str(diff) + ' on ' + lasthash)
 
 if __name__ == "__main__":
     manager = multiprocessing.Manager()
