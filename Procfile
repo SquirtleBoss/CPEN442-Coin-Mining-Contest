@@ -1,1 +1,1 @@
-worker: python collider.py
+worker: python miner.py
